@@ -10,15 +10,15 @@ set cr=$r*0.001
 set cot=0.0005
 
 mesh cylindrical
-x.m l=0 s=0.0002
-x.m l=$cr s=0.0002
-x.m l=$cr+$cot s=0.0005
+x.m l=0 s=0.0001
+x.m l=$cr s=0.0001
+x.m l=$cr+$cot s=0.00025
 
-y.m l=0 s=0.0002
-y.m l=$sl+$cl+$dl s=0.0002
+y.m l=0 s=0.0001
+y.m l=$sl+$cl+$dl s=0.0001
 
-region num=1 x.max=$cr silicon
-region num=2 x.min=$cr x.max=$cr+$cot sio2
+region  num=1   x.min=0.00 x.max=$cr	  y.min=0.000  y.max=$sl+$cl+$dl  silicon 
+region  num=2   x.min=$cr  x.max=$cr+$cot y.min=0.000  y.max=$sl+$cl+$dl  sio2
 
 electrode name=source x.max=$cr y.max=0
 electrode name=drain  x.max=$cr y.min=$sl+$cl+$dl
@@ -42,10 +42,10 @@ num.band=1 eigen=1 esize.negf=2000
 method carr=0
 
 solve init
-save outf=fast_equilibrium.str
+save outf=equilibrium.str
 
 
-log outf=fast_IdVg.log
+log outf=IdVg.log
 solve v2=-0.6
 solve v3=0 vstep=-0.1 vfinal=-0.6 name=gate
 log off
@@ -56,12 +56,13 @@ extract name="Ion"  y.val from curve(v."gate", i."drain") where x.val=-0.6
 extract name="Ion_Ioff" abs($"Ion"/$"Ioff")
 
 
-save outf=fast_on.str
+save outf=on.str
 
 
 
-tonyplot fast_equilibrium.str
-tonyplot fast_on.str
-tonyplot fast_IdVg.log
+tonyplot equilibrium.str
+tonyplot on.str
+tonyplot IdVg.log
 
 quit
+
