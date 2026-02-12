@@ -1,8 +1,3 @@
-Below is a **clean, technical, and educational README** suitable for a **research / learning repository** using **Silvaco ATLAS** for a **cylindrical Gate-All-Around (GAA) nanowire p-MOSFET with quantum transport**.
-You can paste this directly as `README.md`.
-
----
-
 # Cylindrical GAA Nanowire p-MOSFET Simulation using Silvaco ATLAS
 
 ## Overview
